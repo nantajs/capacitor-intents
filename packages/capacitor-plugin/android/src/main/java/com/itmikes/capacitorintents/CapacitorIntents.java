@@ -10,17 +10,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,25 +74,29 @@ public class CapacitorIntents extends Plugin {
                 ifilt.addAction(jsArr.getString(i));
             }
             receiverMap.put(
-                callBackID,
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        PluginCall refCall = watchingCalls.get(callBackID);
-                        if (refCall != null) {
-                            JSObject jsO = null;
-                            try {
-                                jsO = JSObject.fromJSONObject(getIntentJson(intent));
-                                refCall.resolve(jsO);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    callBackID,
+                    new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context context, Intent intent) {
+                            PluginCall refCall = watchingCalls.get(callBackID);
+                            if (refCall != null) {
+                                JSObject jsO = null;
+                                try {
+                                    jsO = JSObject.fromJSONObject(getIntentJson(intent));
+                                    refCall.resolve(jsO);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     }
-                }
             );
 
-            this.getContext().registerReceiver(receiverMap.get(callBackID), ifilt);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                this.getContext().registerReceiver(receiverMap.get(callBackID), ifilt, Context.RECEIVER_EXPORTED);
+            } else {
+                this.getContext().registerReceiver(receiverMap.get(callBackID), ifilt);
+            }
         } else {
             call.reject("Filters are required: at least 1 entry");
         }
@@ -124,11 +131,11 @@ public class CapacitorIntents extends Plugin {
             for (int i = 0; i < arrayList.size(); i++) result.put(toJsonValue(arrayList.get(i)));
             return result;
         } else if (
-            value instanceof String ||
-            value instanceof Boolean ||
-            value instanceof Integer ||
-            value instanceof Long ||
-            value instanceof Double
+                value instanceof String ||
+                        value instanceof Boolean ||
+                        value instanceof Integer ||
+                        value instanceof Long ||
+                        value instanceof Double
         ) {
             return value;
         } else {
