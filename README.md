@@ -1,4 +1,4 @@
-# capacitor-android-intents
+# @nanta/capacitor-intents
 
 Simple intent tools for Capacitor on Android platform.
 

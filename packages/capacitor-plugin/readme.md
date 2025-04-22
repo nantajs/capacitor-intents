@@ -2,10 +2,13 @@
 
 Simple intent tools for Capacitor on Android platform.
 
+Origin fork from [capacitor-intents](https://github.com/IT-MikeS/capacitor-intents)。
+This fork mainly support android 14+ platform.
+
 ## Install
 
 ```bash
-npm install capacitor-android-intents
+npm install @nanta/capacitor-intents
 npx cap sync
 ```
 
