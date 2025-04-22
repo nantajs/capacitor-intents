@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   const [testState, setTestState] = useState<boolean | null>(null);
 
   const setupPluginTest = async () => {
-    const rId = await CapacitorIntents.registerBroadcastReceiver({filters: ['example.itmikes.action']}, async (data) => {
+    const rId = await CapacitorIntents.registerBroadcastReceiver({ filters: ['example.itmikes.action'] }, async (data) => {
       // data is a JS Object but could contain any structure
       console.dir(data);
       const extras = JSON.parse(data['extras'].value);
@@ -27,11 +27,10 @@ const Home: React.FC = () => {
       }
 
       // now unregister
-      if(receiverId !== null) {
-        await CapacitorIntents.unregisterBroadcastReceiver({id: receiverId});
+      if (receiverId !== null) {
+        await CapacitorIntents.unregisterBroadcastReceiver({ id: receiverId });
         receiverId = null;
       }
-      
       forceUpdate();
     });
 
@@ -41,8 +40,18 @@ const Home: React.FC = () => {
   }
 
   const testPlugin = async () => {
-    await CapacitorIntents.sendBroadcastIntent({action: 'example.itmikes.action', value: {testValue: "Test String"}});
+    await CapacitorIntents.sendBroadcastIntent({ action: 'example.itmikes.action', value: { testValue: "Test String" } });
     setIsTestSetup(false);
+  }
+
+  const testHasScanner = async () => {
+    const res = await CapacitorIntents.getDeviceInfo
+    ();
+    console.log('------test result ------')
+    console.log(JSON.stringify(res))
+    console.log(res?.hasBarcodeScanner);
+    console.log('------test result ------')
+
   }
 
   return (
@@ -61,7 +70,9 @@ const Home: React.FC = () => {
         <div>
           <IonButton disabled={isTestSetup} onClick={setupPluginTest}>Setup Test</IonButton>
           <IonButton disabled={!isTestSetup} onClick={testPlugin}>Run Test</IonButton>
-          <p><span style={{fontWeight: 'bolder'}}>Test Passed:</span> {testState === null ? "Not Yet Run" : (testState ? "Passed" : "Failed")}</p>
+          <IonButton onClick={testHasScanner}>Has Scanner</IonButton>
+
+          <p><span style={{ fontWeight: 'bolder' }}>Test Passed:</span> {testState === null ? "Not Yet Run" : (testState ? "Passed" : "Failed")}</p>
         </div>
       </IonContent>
     </IonPage>

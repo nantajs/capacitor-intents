@@ -6,9 +6,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.InputDevice;
 import android.webkit.MimeTypeMap;
 
 import com.getcapacitor.JSArray;
@@ -22,6 +25,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -63,6 +67,26 @@ public class CapacitorIntents extends Plugin {
         intended.putExtra("value", passingData.toString());
         this.getContext().sendBroadcast(intended);
         call.resolve();
+    }
+
+    @PluginMethod
+    public void getDeviceInfo(PluginCall call) {
+        PackageManager packageManager = this.getContext().getPackageManager();
+        // 检查是否有条码扫描相关的功能
+        Boolean status = packageManager.hasSystemFeature("com.google.zxing.client.android.SCAN");
+        JSObject jsonObject = new JSObject();
+        jsonObject.put("hasBarcodeScanner", status);
+
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        jsonObject.put("manufacturer", manufacturer);
+        jsonObject.put("model", model);
+
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this.getContext());
+        boolean hasNfc = nfcAdapter != null && nfcAdapter.isEnabled();
+        jsonObject.put("hasRfidReader", hasNfc);
+
+        call.resolve(jsonObject);
     }
 
     private void requestBroadcastUpdates(final PluginCall call) throws JSONException {

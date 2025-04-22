@@ -6,5 +6,7 @@ export interface CapacitorIntentsPlugin {
 
   unregisterBroadcastReceiver(options: { id: string }): Promise<void>;
 
+  getDeviceInfo(): Promise<{ hasBarcodeScanner: boolean }>;
+
   sendBroadcastIntent(options: { action: string; value: { [key: string]: any } }): Promise<void>;
 }

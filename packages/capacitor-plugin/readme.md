@@ -20,6 +20,7 @@ npx cap sync
 
 * [`registerBroadcastReceiver(...)`](#registerbroadcastreceiver)
 * [`unregisterBroadcastReceiver(...)`](#unregisterbroadcastreceiver)
+* [`getDeviceInfo()`](#getdeviceinfo)
 * [`sendBroadcastIntent(...)`](#sendbroadcastintent)
 
 </docgen-index>
@@ -52,6 +53,17 @@ unregisterBroadcastReceiver(options: { id: string; }) => any
 | Param         | Type                         |
 | ------------- | ---------------------------- |
 | **`options`** | <code>{ id: string; }</code> |
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### getDeviceInfo()
+
+```typescript
+getDeviceInfo() => any
+```
 
 **Returns:** <code>any</code>
 
