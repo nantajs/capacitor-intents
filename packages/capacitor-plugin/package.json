@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IT-MikeS/capacitor-intents"
+    "url": "git+https://github.com/IT-MikeS/capacitor-intents.git"
   },
   "bugs": {
     "url": "https://github.com/IT-MikeS/capacitor-intents/issues"
@@ -69,5 +69,6 @@
     "android": {
       "src": "android"
     }
-  }
+  },
+  "homepage": "https://github.com/IT-MikeS/capacitor-intents#readme"
 }
