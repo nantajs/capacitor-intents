@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IT-MikeS/capacitor-intents.git"
+    "url": "https://github.com/nantajs/capacitor-intents"
   },
   "bugs": {
-    "url": "https://github.com/IT-MikeS/capacitor-intents/issues"
+    "url": "https://github.com/nantajs/capacitor-intents/issues"
   },
   "keywords": [
     "capacitor",
