@@ -11,6 +11,8 @@ const Home: React.FC = () => {
   let receiverId: string | null = null;
   const [isTestSetup, setIsTestSetup] = useState<boolean>(false);
   const [testState, setTestState] = useState<boolean | null>(null);
+  const [deviceInfo, setDeviceInfo] = useState<string | null>(null);
+
 
   const setupPluginTest = async () => {
     const rId = await CapacitorIntents.registerBroadcastReceiver({ filters: ['example.itmikes.action'] }, async (data) => {
@@ -45,10 +47,10 @@ const Home: React.FC = () => {
   }
 
   const testHasScanner = async () => {
-    const res = await CapacitorIntents.getDeviceInfo
-    ();
+    const res = await CapacitorIntents.getDeviceInfo();
     console.log('------test result ------')
     console.log(JSON.stringify(res))
+    setDeviceInfo(JSON.stringify(res));
     console.log(res?.hasBarcodeScanner);
     console.log('------test result ------')
 
@@ -73,6 +75,7 @@ const Home: React.FC = () => {
           <IonButton onClick={testHasScanner}>Has Scanner</IonButton>
 
           <p><span style={{ fontWeight: 'bolder' }}>Test Passed:</span> {testState === null ? "Not Yet Run" : (testState ? "Passed" : "Failed")}</p>
+          <p>{deviceInfo}</p>
         </div>
       </IonContent>
     </IonPage>

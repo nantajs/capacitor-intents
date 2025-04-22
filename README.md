@@ -5,6 +5,10 @@ Simple intent tools for Capacitor on Android platform.
 Origin fork from [capacitor-intents](https://github.com/IT-MikeS/capacitor-intents)。
 This fork mainly support android 14+ platform.
 
+<a href="https://www.npmjs.com/package/@nanta/capacitor-intents"><img src="https://badgen.net/npm/dm/@nanta/capacitor-intents" alt="Download"></a>
+<a href="https://www.npmjs.com/package/@nanta/capacitor-intents"><img src="https://badgen.net/npm/v/@nanta/capacitor-intents" alt="Version"></a>
+<a href="https://www.npmjs.com/package/@nanta/capacitor-intents"><img src="https://badgen.net/npm/license/@nanta/capacitor-intents" alt="License"></a> 
+
 ## Install
 
 ```bash
