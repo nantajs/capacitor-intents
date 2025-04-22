@@ -92,15 +92,15 @@ importers:
       '@ionic/react-router':
         specifier: ^7.0.0
         version: 7.8.6(react-dom@18.3.1(react@18.3.1))(react-router-dom@5.3.4(react@18.3.1))(react-router@5.3.4(react@18.3.1))(react@18.3.1)
+      '@nanta/capacitor-intents':
+        specifier: workspace:*
+        version: link:../capacitor-plugin
       '@types/react-router':
         specifier: ^5.1.20
         version: 5.1.20
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
-      capacitor-android-intents:
-        specifier: workspace:*
-        version: link:../capacitor-plugin
       ionicons:
         specifier: ^7.0.0
         version: 7.4.0
